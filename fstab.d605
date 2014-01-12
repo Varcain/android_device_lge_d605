@@ -1,6 +1,3 @@
-/dev/block/platform/msm_sdcc.1/by-name/recovery		/recovery	emmc	defaults							defaults
-/dev/block/platform/msm_sdcc.1/by-name/boot		/boot		emmc    defaults							defaults            
-/dev/block/platform/msm_sdcc.1/by-name/cache		/cache		ext4	noatime,nosuid,nodev,barrier=1,data=ordered			wait,check
-/dev/block/platform/msm_sdcc.1/by-name/userdata		/data		ext4	noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc	wait,check
-/dev/block/platform/msm_sdcc.1/by-name/system		/system		ext4	ro,barrier=1							wait,check
-/dev/block/platform/msm_sdcc.3/mmcblk1p1		/external_sd	vfat	defaults							recoveryonly
+/cache	ext4	/dev/block/mmcblk1p3
+/data	ext4	/dev/block/mmcblk1p4
+/system	ext4	/dev/block/mmcblk1p2
