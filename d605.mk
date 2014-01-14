@@ -62,6 +62,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/thermald-8930-empty.conf:system/etc/thermald-8930-empty.conf \
 	$(LOCAL_PATH)/config/thermald-8930.conf:system/etc/thermald-8930.conf \
 	$(LOCAL_PATH)/config/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	$(LOCAL_PATH)/config/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+	$(LOCAL_PATH)/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
+	$(LOCAL_PATH)/config/qosmgr_rules.xml:system/etc/qosmgr_rules.xml \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \

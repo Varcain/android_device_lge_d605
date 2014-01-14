@@ -161,12 +161,6 @@ on boot
    write /sys/devices/i2c-3/3-005b/update_fw 1
    start qcamerasvr
 
-# LGE_CHANGE_S [i_atnt][HieednMenu] Add log service, jjh.jang@lge.com, 2011-08-19
-    mkdir /data/logger 0771 system system
-    chown system system /data/logger
-    chmod 0775 /data/logger
-# LGE_CHANGE_E [i_atnt][HieednMenu] Add log service, jjh.jang@lge.com, 2011-08-19
-
     chown system system /sys/class/power_supply/battery/block_charging
 
 
@@ -209,11 +203,6 @@ on emmc-fs
 
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro uid=1000 gid=1000 shortname=lower dmask=227 fmask=337
-
-    #restorecon /persist/.bt_nv.bin
-    #restorecon /sns/cal/sns.reg
-    #restorecon /sns/cal
-    #restorecon /sns
 
 # import cne init file
 on post-fs
@@ -292,8 +281,6 @@ on post-fs-data
     # Enable the setgid bit on the directory
     chmod 2770 /data/audio
 
-    setprop vold.post_fs_data_done 1
-
     chown system system /persist-lg
     chmod 0771 /persist-lg
     chown system system /mpt
@@ -310,10 +297,6 @@ on post-fs-data
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
-#LGE_CHANGE_S 20120130 HiddenMenu, seungin.choi@lge.com
-    mkdir /data/logger 0775 system system
-    exec /system/bin/smpl_count
-#LGE_CHANGE_E 20120130 HiddenMenu, seungin.choi@lge.com
 
 # LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add immersion solution
 # Begin Immersion changes
@@ -321,14 +304,6 @@ on post-fs-data
 # End Immersion changes
 # LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
 
-#LGE_CHANGE_S 2012-04-27, HiddenMenu, seungin.choi@lge.com
-    chmod 0775 /data/logger/LogPropValue.sh
-    chown system system /data/logger/LogPropValue.sh
-#LGE_CHANGE_E 2012-04-27, HiddenMenu, seungin.choi@lge.com
-
-#LGE_CHANGE_S 2012-05-08, LogService, inmo.nam@lge.com
-    mkdir /data/log 0755 system system
-#LGE_CHANGE_E 2012-05-08, inmo.nam@lge.com
    #LGDRM
     mkdir /persist-lg/lgdrm 0770 lgdrm lgdrm_acc
     chown lgdrm lgdrm_acc /persist-lg/lgdrm
@@ -382,32 +357,6 @@ on post-fs-data
     chown system system /sys/devices/i2c-12/12-0010/selftest
 # LGE_CHANGE_E [younglae.kim@lge.com] 2012-10-10
 
-#Battery Fake mode
-	chown system system /sys/devices/platform/msm_ssbi.0/pm8038-core/pm8921-charger/power_supply/battery/pseudo_batt
-	chmod 0660 /sys/devices/platform/msm_ssbi.0/pm8038-core/pm8921-charger/power_supply/battery/pseudo_batt
-
-#Power Test (LG Hidden menu)
-	chown system system /sys/class/power_supply/battery/block_charging
-	chown system system /sys/class/power_supply/battery/capacity
-	chown system system /sys/class/power_supply/battery/charge_type
-	chown system system /sys/class/power_supply/battery/current_max
-	chown system system /sys/class/power_supply/battery/current_now
-	chown system system /sys/class/power_supply/battery/device
-	chown system system /sys/class/power_supply/battery/energy_full
-	chown system system /sys/class/power_supply/battery/ext_pwr
-	chown system system /sys/class/power_supply/battery/health	
-	chown system system /sys/class/power_supply/battery/power
-	chown system system /sys/class/power_supply/battery/present	
-	chown system system /sys/class/power_supply/battery/status
-	chown system system /sys/class/power_supply/battery/subsystem
-	chown system system /sys/class/power_supply/battery/technology
-	chown system system /sys/class/power_supply/battery/temp
-	chown system system /sys/class/power_supply/battery/type
-	chown system system /sys/class/power_supply/battery/valid_batt_id
-	chown system system /sys/class/power_supply/battery/voltage_max_design	
-	chown system system /sys/class/power_supply/battery/voltage_min_design	
-	chown system system /sys/class/power_supply/battery/voltage_now	
-
 # LGE_CHANGE_S, NFC: create data/nfc for nv storage
     mkdir /data/nfc 770 nfc nfc
     mkdir /data/nfc/param 770 nfc nfc
@@ -431,6 +380,8 @@ on post-fs-data
     #CAPP_BLUEERROR_HANDLER: temp version, it will be removed 
     chown root system /data/dontpanic
     chmod 0775 /data/dontpanic
+
+    setprop vold.post_fs_data_done 1
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
@@ -483,7 +434,7 @@ service iprenew_brcm-pan /system/bin/dhcpcd -n
 	disabled
 	oneshot
 
-service btld /system/bin/logwrapper /system/bin/btld -hb 4000000 -pf /system/bin/BCM4330B1_002.001.003.0967.1019.hcd -lpm 1 -nice -16
+service btld /system/bin/btld -hb 4000000 -pf /system/bin/BCM4330B1_002.001.003.0967.1019.hcd -lpm 1 -nice -16
     user root
     group bluetooth net_bt_admin
     disabled
@@ -496,17 +447,6 @@ on property:service.brcm.bt.soft_onoff=1
 # stop btld if soft_onoff is disabled
 on property:service.brcm.bt.soft_onoff=0
     stop btld
-
-#STOPSHIP: Remove logwrapper and -d option before production
-service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -d -n
-    class main
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-# init.rc does not yet support applying capabilities, so run as root and
-# let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc
-    disabled
-#--- BRCM
 
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
@@ -564,7 +504,7 @@ service amp_unload /system/bin/amploader -u
     disabled
     oneshot
 
-service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
+service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -N \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -dd \
     -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1use_multi_chan_concurrent=1
@@ -577,7 +517,7 @@ service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
+service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -dddd \
     -e/data/misc/wifi/entropy.bin
     #   we will start as root and wpa_supplicant will switch to user wifi
@@ -882,139 +822,6 @@ service immvibed_L9ii /system/bin/immvibed_L9ii
 # End Immersion changes
 # LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
 
-service time_daemon /system/bin/time_daemon
-   class late_start
-   user root
-   group root
-
-# LGE_CHANGE_S [i_atnt][HieednMenu] Add log service, jjh.jang@lge.com, 2011-08-19
-# LGE_CHANGE_S, 20120108, HiddenMenu Log_service seungin.choi@lge.com
-service logcat-main /system/bin/logcat -v time -b main -f /data/logger/main.log -n 19 -r 8192 -Z
-	class late_start
-	disabled
-	oneshot
-
-on property:persist.service.main.enable=1
-	start logcat-main
-
-on property:persist.service.main.enable=0
-	stop logcat-main
-
-service logcat-system /system/bin/logcat -v time -b system -f /data/logger/system.log -n 4 -r 4096
-	class late_start
-	disabled
-	oneshot
-
-on property:persist.service.system.enable=1
-	start logcat-system
-
-# [START_LGE_HiddenMenu] , ADD, sungkyoung.kim ,2012-03-23 , change command from "start" to "stop"
-on property:persist.service.system.enable=0
-	stop logcat-system
-#	start logcat-system
-# [END_LGE_HiddenMenu] , ADD, sungkyoung.kim ,2012-03-23 , change command from "start" to "stop"
-
-service logcat-radio /system/bin/logcat -v time -b radio -f /data/logger/radio.log -n 4 -r 4096
-	class late_start
-	disabled
-	oneshot
-
-on property:persist.service.radio.enable=1
-	start logcat-radio
-
-on property:persist.service.radio.enable=0
-	stop logcat-radio
-
-service logcat-events /system/bin/logcat -v time -b events -f /data/logger/events.log -n 4 -r 4096
-	class late_start
-	disabled
-	oneshot
-
-on property:persist.service.events.enable=1
-	start logcat-events
-
-on property:persist.service.events.enable=0
-	stop logcat-events
-
-service logcat-kernel /system/bin/sh /system/etc/save_kernel_log.sh
-    class late_start
-	disabled
-	oneshot
-
-on property:persist.service.kernel.enable=1
-	start logcat-kernel
-
-on property:persist.service.kernel.enable=0
-	stop logcat-kernel
-
-# LGE_CHANGE_S, taewann.kim@lge.com, HiddenMenu, make packet log dummy file permission 666   
-service make-packetlog /system/bin/sh /system/etc/make_packet_log.sh   
-	class late_start  
-	disabled  
-	oneshot  
-# LGE_CHANGE_E, taewann.kim@lge.com, HiddenMenu, make packet log dummy file permission 666
-
-# LGE_CHANGE_S, [LGE_DATA][TCP_DUMP], gilchan.park@lge.com, 2012-02-16
-service logging_packet /system/xbin/tcpdump -i any -p -C 4 -W 10 -Z root -s 0 -w /data/logger/packet.pcap
-	class late_start
-	disabled
-	oneshot
-
-on property:persist.service.logging_packet=1
-	start make-packetlog 
-	start logging_packet
-
-on property:persist.service.logging_packet=0
-	start make-packetlog 
-	stop logging_packet
-# LGE_CHANGE_E, [LGE_DATA][TCP_DUMP], gilchan.park@lge.com, 2012-02-16
-
-#LGE_CHANGE_S seungin.choi@lge.com, HiddenMenu, Loading LogService Properties
-service cur_prop_val /system/bin/sh /data/logger/LogPropValue.sh
-	class late_start
-	user system
-	oneshot
-#LGE_CHANGE_E, seungin.choi@lge.com, HiddenMenu, Loading LogService Properties
-
-service log_main_ats /system/bin/logcat -v time -b main -f /storage/external_SD/main.log 
-	class late_start
-	disabled
-	oneshot
-
-service log_system_ats /system/bin/logcat -v time -b system -f /storage/external_SD/system.log
-	class late_start
-	disabled
-	oneshot
-
-service log_radio_ats /system/bin/logcat -v time -b radio -f /storage/external_SD/radio.log
-	class late_start
-	disabled
-	oneshot
-
-service log_events_ats /system/bin/logcat -v time -b events -f /storage/external_SD/events.log
-	class late_start
-	disabled
-	oneshot
-
-service log_kernel_ats /system/bin/sh /system/etc/save_kernel_log_ats.sh
-    class late_start
-	disabled
-	oneshot
-
-on property:persist.service.ats.enable=true
-	start log_main_ats
-	start log_system_ats
-	start log_radio_ats
-	start log_events_ats
-	start log_kernel_ats
-
-on property:persist.service.ats.enable=false
-	stop log_main_ats
-	stop log_system_ats
-	stop log_radio_ats
-	stop log_events_ats
-	stop log_kernel_ats
-
 service thermal_enable /system/bin/thermald --config-file /system/etc/thermald-8930.conf
 	class late_start
 	disabled
@@ -1035,71 +842,6 @@ on property:persist.service.ther.enable=false
 on property:persist.service.usb_ther=true
 on property:persist.service.usb_ther=false
 # LGE_CHANGE_E [daewon1004.kim@lge.com] 2013-03-21, Add fx3 same
-
-#LGE_CHANGE_S 2012.04 lg-msp@lge.com MTS TEAM
-service mtsd /system/bin/mtsd
-	class late_start
-	oneshot
-	socket mtsd.port stream 660 system system
-
-service mtsd_kmsg /system/bin/mtsd_kmsg
-	class late_start
-	disabled
-	oneshot
-
-service mtsd_main /system/bin/mtsd_logcat_main
-	class late_start
-	disabled
-	oneshot
-
-service mtsd_events /system/bin/mtsd_logcat_events
-	class late_start
-	disabled
-	oneshot
-
-service mtsd_radio /system/bin/mtsd_logcat_radio
-	class late_start
-	disabled
-	oneshot
-
-service mtsd_system /system/bin/mtsd_logcat_system
-	class late_start
-	disabled
-	oneshot
-
-service mtsd_fmgr /system/bin/mtsd_file_manager
-	class late_start
-	oneshot
-
-service mtsd_hist /system/bin/mtsd_logcat_filter
-	class late_start
-	disabled
-	oneshot
-
-on property:sys.mts.work=1
-	start mtsd_main
-	start mtsd_kmsg
-	start mtsd_events
-	start mtsd_radio
-	start mtsd_system
-	start mtsd_hist
-
-on property:sys.mts.work=0
-	stop mtsd_main
-	stop mtsd_kmsg
-	stop mtsd_events
-	stop mtsd_radio
-	stop mtsd_system
-	stop mtsd_hist
-#LGE_CHANGE_E 2012.04 lg-msp@lge.com MTS TEAM
-
-# 2013-04-16 SungKyoung-Kim(sungkyoung.kim@lge.com) Add Fake_Battery to maintain battery fake mode after reboot [START]
-service fake_batt /system/bin/sh /data/fake_batt.sh	
-    class late_start
-    user system
-    group system
-    oneshot
-# 2013-04-16 SungKyoung-Kim(sungkyoung.kim@lge.com) Add Fake_Battery to maintain battery fake mode after reboot [END]
 
 #LGE_UPDATE_S 20130311 deco.park@lge.com
 on property:ro.build.type=user
