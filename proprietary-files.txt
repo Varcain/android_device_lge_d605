@@ -40,6 +40,12 @@ lib/liblgsecclk.so
 lib/libwvoemprov.so
 lib/libQSEEComAPI.so
 lib/libdiagd_client.so
+lib/libnfc.so
+lib/libbluedroid.so
+lib/libhardware_legacy.so
+lib/libbt-aptx-4.0.3.so
+lib/libwfconabswpas.so
+lib/libusim_aka.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
@@ -69,4 +75,9 @@ bin/thermald
 bin/mpdecision
 bin/cnd
 bin/atd
+bin/btld
+bin/wpa_supplicant
+bin/ATFWD-daemon
+bin/immvibed_L9ii
+bin/qosmgr
 
