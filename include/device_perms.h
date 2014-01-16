@@ -22,5 +22,7 @@
     { "lge.factoryversion",   AID_SYSTEM,   AID_SYSTEM }, \
     { "lge.factoryversion.",   AID_SYSTEM,   AID_SYSTEM }, \
     { "wifi.",   AID_WIFI,   0 }, \
+    { "com.google.clientidbase",   AID_SYSTEM,   AID_SYSTEM }, \
+    { "com.google.clientidbase.",   AID_SYSTEM,   AID_SYSTEM }, \
     { "service.brcm.bt.", AID_BLUETOOTH, 0 },
 #endif /* DEVICE_PERMS_H */

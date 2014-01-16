@@ -46,6 +46,23 @@ lib/libhardware_legacy.so
 lib/libbt-aptx-4.0.3.so
 lib/libwfconabswpas.so
 lib/libusim_aka.so
+lib/libqmi_csi.so
+lib/libmmparser.so
+lib/libmmosal.so
+lib/libDivxDrm.so
+lib/libdrmfs.so
+lib/liboemcamera.so
+lib/libmmjpeg.so
+lib/libgemini.so
+lib/libmercury.so
+lib/libmm-abl.so
+lib/libmm-abl-oem.so
+lib/libmmcamera_statsproc31.so
+lib/libmmcamera_image_stab.so
+lib/libmmcamera_frameproc.so
+lib/libmmcamera_wavelet_lib.so
+lib/libmmcamera_hdr_lib.so
+vendor/lib/libwvm.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
@@ -80,4 +97,12 @@ bin/wpa_supplicant
 bin/ATFWD-daemon
 bin/immvibed_L9ii
 bin/qosmgr
+bin/qseecomd
+bin/time_daemon
+bin/lgsecclkserver
+bin/lgdrmserver
+bin/mm-qcamera-daemon
+bin/mm-pp-daemon 
+bin/nfsserversetup
+bin/sensord
 

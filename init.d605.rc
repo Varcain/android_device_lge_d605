@@ -4,12 +4,12 @@ on early-init
     mkdir /firmware 0771 system system
     symlink /data/tombstones /tombstones
     # for backwards compatibility
-    export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0775 root system
-    mkdir /storage/sdcard0 0000 system system
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-    mkdir /storage/external_SD 0000 system system
+    #export EXTERNAL_STORAGE /storage/sdcard0
+    #mkdir /storage 0775 root system
+    #mkdir /storage/sdcard0 0000 system system
+    #symlink /storage/sdcard0 /sdcard
+    #symlink /storage/sdcard0 /mnt/sdcard
+    #mkdir /storage/external_SD 0000 system system
 
 # LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add immersion solution
 # Begin Immersion changes
@@ -30,14 +30,22 @@ on init
     #export EMULATED_STORAGE_TARGET /storage/emulated
     #export EXTERNAL_ADD_STORAGE /storage/external_SD
 
+    export EXTERNAL_STORAGE /storage/sdcard0
+
+    # create mountpoints for storage
+    mkdir /storage 0111 system system
+    mkdir /storage/sdcard0 0000 system system
+    symlink /storage/sdcard0 /sdcard
+
     mkdir /mnt 0775 root system
-    mkdir /mnt/sdcard 0000 system system
-    #symlink /mnt/sdcard /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+    #mkdir /mnt/sdcard 0000 system system
+    symlink /mnt/sdcard /sdcard
     # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    #symlink /storage/emulated/legacy /sdcard
+    #symlink /storage/emulated/legacy /mnt/sdcard
+    #symlink /storage/emulated/legacy /storage/sdcard0
+    #symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
     # Setup custom emergency number list based on
     # the MCC. This is needed by RIL.
@@ -165,17 +173,7 @@ on boot
 
 
 on emmc-fs
-    mkdir /system
-    wait /dev/block/mmcblk1p2
-    mount ext4 /dev/block/mmcblk1p2 /system ro barrier=1
-
-    wait /dev/block/mmcblk1p3
-    exec /system/bin/e2fsck -y /dev/block/mmcblk1p3
-    mount ext4 /dev/block/mmcblk1p3 /cache noatime nosuid nodev barrier=1 data=ordered
-
-    wait /dev/block/mmcblk1p4
-    exec /system/bin/e2fsck -y /dev/block/mmcblk1p4
-    mount ext4 /dev/block/mmcblk1p4 /data noatime nosuid nodev barrier=1 data=ordered noauto_da_alloc
+    mount_all fstab.d605
 
     mkdir /mpt 0775 system system
     mkdir /sns 0771 system system
@@ -409,6 +407,7 @@ service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service cnd /system/bin/cnd
     class late_start
@@ -419,7 +418,7 @@ service rmt_storage /system/bin/rmt_storage
     user root
     disabled
 
-on property:ro.boot.emmc=true
+on property:ro.boot.emmc=1
     start rmt_storage
 
 #+++ BRCM
@@ -554,6 +553,12 @@ service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
 
+service wiperiface /system/bin/wiperiface
+    class late_start
+    user gps
+    group gps qcom_oncrpc net_raw
+    oneshot
+
 #[COM_GNSS::COMMON][S][mc-gnss@lge.com][2012.10.23][disable xtwifi daemon]
 service location_mq /system/bin/location-mq
     class late_start
@@ -627,11 +632,11 @@ service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
 on property:sys.boot_completed=1
     start qcom-post-boot
 
-service atfwd /system/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
-    onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
+#service atfwd /system/bin/ATFWD-daemon
+#    class late_start
+#    user system
+#    group system radio
+#    onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
 
 service hdmid /system/bin/hdmid
     class late_start
@@ -683,6 +688,11 @@ service time_daemon /system/bin/time_daemon
 on property:persist.timed.enable=true
     start time_daemon
 
+service battery_monitor /system/bin/battery_monitor
+    user system
+    group system
+    disabled
+
 service ril-daemon1 /system/bin/rild -c 1
     class main
     socket rild1 stream 660 root radio
@@ -698,14 +708,11 @@ service profiler_daemon /system/bin/profiler_daemon
     disabled
 
 #LGE_UPDATE_S 20120905 fx1-bsp-fs@lge.com
-service sdcard /system/bin/sdcard /data/media 1023 1023
-	class main
+#service sdcard /system/bin/sdcard /data/media 1023 1023
+#	class main
 
 # This will make sure that sdcard service starts as late_start.
 on nonencrypted
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
-
-on property:vold.decrypt=trigger_restart_framework
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service charger /charger
