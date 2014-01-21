@@ -3,13 +3,14 @@ import init.lge.usb.rc
 on early-init
     mkdir /firmware 0771 system system
     symlink /data/tombstones /tombstones
+
     # for backwards compatibility
-    #export EXTERNAL_STORAGE /storage/sdcard0
-    #mkdir /storage 0775 root system
-    #mkdir /storage/sdcard0 0000 system system
-    #symlink /storage/sdcard0 /sdcard
-    #symlink /storage/sdcard0 /mnt/sdcard
-    #mkdir /storage/external_SD 0000 system system
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0775 root system
+    mkdir /storage/sdcard0 0000 system system
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+    mkdir /storage/sdcard1 0000 system system
 
 # LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add immersion solution
 # Begin Immersion changes
@@ -22,30 +23,14 @@ on init
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-
-    #export EXTERNAL_STORAGE /storage/emulated/legacy
-    #export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    #export EMULATED_STORAGE_TARGET /storage/emulated
-    #export EXTERNAL_ADD_STORAGE /storage/external_SD
-
-    export EXTERNAL_STORAGE /storage/sdcard0
-
-    # create mountpoints for storage
-    mkdir /storage 0111 system system
-    mkdir /storage/sdcard0 0000 system system
-    symlink /storage/sdcard0 /sdcard
+    export EXTERNAL_ADD_STORAGE /storage/sdcard1
 
     mkdir /mnt 0775 root system
-    symlink /storage/sdcard0 /mnt/sdcard
-    #mkdir /mnt/sdcard 0000 system system
+    mkdir /mnt/sdcard 0000 system system
     symlink /mnt/sdcard /sdcard
-    # Support legacy paths
-    #symlink /storage/emulated/legacy /sdcard
-    #symlink /storage/emulated/legacy /mnt/sdcard
-    #symlink /storage/emulated/legacy /storage/sdcard0
-    #symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+    # Set permissions for persist partition
+    mkdir /persist 0771 system system
 
     # Setup custom emergency number list based on
     # the MCC. This is needed by RIL.
@@ -708,8 +693,8 @@ service profiler_daemon /system/bin/profiler_daemon
     disabled
 
 #LGE_UPDATE_S 20120905 fx1-bsp-fs@lge.com
-#service sdcard /system/bin/sdcard /data/media 1023 1023
-#	class main
+service sdcard /system/bin/sdcard /data/media 1023 1023
+	class main
 
 # This will make sure that sdcard service starts as late_start.
 on nonencrypted
