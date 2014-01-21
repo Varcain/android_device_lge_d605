@@ -1,4 +1,5 @@
 lib/hw/sensors.default.so
+lib/hw/lights.msm8960.so
 lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLES_android.so
@@ -62,6 +63,8 @@ lib/libmmcamera_image_stab.so
 lib/libmmcamera_frameproc.so
 lib/libmmcamera_wavelet_lib.so
 lib/libmmcamera_hdr_lib.so
+lib/libmmgesture_services.so
+lib/libmmcamera_plugin.so
 vendor/lib/libwvm.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
@@ -90,19 +93,17 @@ bin/qmuxd
 bin/netmgrd
 bin/thermald
 bin/mpdecision
-bin/cnd
 bin/atd
+bin/cnd
 bin/btld
-bin/wpa_supplicant
-bin/ATFWD-daemon
 bin/immvibed_L9ii
 bin/qosmgr
 bin/qseecomd
 bin/time_daemon
 bin/lgsecclkserver
-bin/lgdrmserver
 bin/mm-qcamera-daemon
 bin/mm-pp-daemon 
 bin/nfsserversetup
 bin/sensord
+bin/BCM4330B1_002.001.003.0967.1019.hcd
 
