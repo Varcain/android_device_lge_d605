@@ -42,8 +42,6 @@ lib/libwvoemprov.so
 lib/libQSEEComAPI.so
 lib/libdiagd_client.so
 lib/libnfc.so
-lib/libbluedroid.so
-lib/libhardware_legacy.so
 lib/libbt-aptx-4.0.3.so
 lib/libwfconabswpas.so
 lib/libusim_aka.so
@@ -93,7 +91,6 @@ bin/qmuxd
 bin/netmgrd
 bin/thermald
 bin/mpdecision
-bin/atd
 bin/cnd
 bin/btld
 bin/immvibed_L9ii
