@@ -63,6 +63,8 @@ lib/libmmcamera_wavelet_lib.so
 lib/libmmcamera_hdr_lib.so
 lib/libmmgesture_services.so
 lib/libmmcamera_plugin.so
+lib/libacdbloader.so
+lib/libaudcal.so
 vendor/lib/libwvm.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw

@@ -65,6 +65,8 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
 	$(LOCAL_PATH)/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
 	$(LOCAL_PATH)/config/qosmgr_rules.xml:system/etc/qosmgr_rules.xml \
+	$(LOCAL_PATH)/config/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \
+	$(LOCAL_PATH)/config/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -97,6 +99,23 @@ PRODUCT_PACKAGES += \
         hwcomposer.msm8960 \
         gralloc.msm8960 \
         copybit.msm8960
+
+# OMX
+PRODUCT_PACKAGES += \
+    libstagefrighthw \
+    libdivxdrmdecrypt \
+#    libOmxVdec \
+#    libOmxVenc \
+    libmm-omxcore \
+    libOmxCore
+
+PRODUCT_PACKAGES += \
+       audio_policy.msm8960 \
+       audio.primary.msm8960 \
+       audio.a2dp.default \
+       audio.usb.default \
+       audio.r_submix.default \
+       libaudio-resampler
 
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing
