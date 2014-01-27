@@ -1,5 +1,6 @@
 lib/hw/sensors.default.so
 lib/hw/lights.msm8960.so
+lib/hw/camera.msm8960.so
 lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLES_android.so
@@ -63,6 +64,20 @@ lib/libmmcamera_wavelet_lib.so
 lib/libmmcamera_hdr_lib.so
 lib/libmmgesture_services.so
 lib/libmmcamera_plugin.so
+lib/libmmstillomx.so
+lib/libimage-jpeg-enc-omx-comp.so
+lib/libimage-omx-common.so
+lib/libmmcamera_interface2.so
+lib/libmorpho_movie_stabilization.so
+lib/libcamera_client.so
+lib/libchromatix_imx111_default_video.so
+lib/libchromatix_imx111_preview.so
+lib/libchromatix_imx111_video_hd.so
+lib/libchromatix_imx111_zsl.so
+lib/libchromatix_imx119_default_video.so
+lib/libchromatix_imx119_preview.so
+lib/libchromatix_imx119_video_hd.so
+lib/libchromatix_imx119_vt.so
 lib/libacdbloader.so
 lib/libaudcal.so
 vendor/lib/libwvm.so

@@ -20,8 +20,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-$(call inherit-product, build/target/product/full.mk)
-
 # Scripts
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/init.d605.rc:root/init.d605.rc \
@@ -65,6 +63,10 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
 	$(LOCAL_PATH)/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
 	$(LOCAL_PATH)/config/qosmgr_rules.xml:system/etc/qosmgr_rules.xml \
+	$(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml
+
+PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \
 	$(LOCAL_PATH)/config/audio_policy.conf:system/etc/audio_policy.conf
 
@@ -102,12 +104,12 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libstagefrighthw \
-    libdivxdrmdecrypt \
-#    libOmxVdec \
-#    libOmxVenc \
-    libmm-omxcore \
-    libOmxCore
+	libstagefrighthw \
+	libdivxdrmdecrypt \
+	libOmxVdec \
+	libOmxVenc \
+	libmm-omxcore \
+	libOmxCore
 
 PRODUCT_PACKAGES += \
        audio_policy.msm8960 \
