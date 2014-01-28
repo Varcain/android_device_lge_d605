@@ -64,7 +64,8 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
 	$(LOCAL_PATH)/config/qosmgr_rules.xml:system/etc/qosmgr_rules.xml \
 	$(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
-	$(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml
+	$(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/config/gps.conf:system/etc/gps.conf
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \

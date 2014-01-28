@@ -1,6 +1,7 @@
 lib/hw/sensors.default.so
 lib/hw/lights.msm8960.so
 lib/hw/camera.msm8960.so
+lib/hw/gps.default.so
 lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLES_android.so
@@ -47,7 +48,7 @@ lib/libbt-aptx-4.0.3.so
 lib/libwfconabswpas.so
 lib/libusim_aka.so
 lib/libqmi_csi.so
-lib/libmmparser.so
+#lib/libmmparser.so
 lib/libmmosal.so
 lib/libDivxDrm.so
 lib/libdrmfs.so
@@ -80,6 +81,10 @@ lib/libchromatix_imx119_video_hd.so
 lib/libchromatix_imx119_vt.so
 lib/libacdbloader.so
 lib/libaudcal.so
+lib/libloc_eng.so
+lib/libloc_adapter.so
+lib/libgps.utils.so
+lib/libloc_api_v02.so
 vendor/lib/libwvm.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
