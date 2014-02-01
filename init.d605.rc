@@ -418,6 +418,15 @@ service iprenew_brcm-pan /system/bin/dhcpcd -n
 	disabled
 	oneshot
 
+on property:dev.bootcomplete=1
+    exec /system/bin/hwaddrs
+
+service hciattach /system/bin/init.qcom.bt.sh
+    class main
+    #user bluetooth
+    group bluetooth net_bt_admin qcom_oncrpc
+    disabled
+
 service btld /system/bin/btld -hb 4000000 -pf /system/bin/BCM4330B1_002.001.003.0967.1019.hcd -lpm 1 -nice -16
     user root
     group bluetooth net_bt_admin

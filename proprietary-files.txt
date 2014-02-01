@@ -114,8 +114,6 @@ bin/netmgrd
 bin/thermald
 bin/mpdecision
 bin/cnd
-bin/btld
-bin/immvibed_L9ii
 bin/qosmgr
 bin/qseecomd
 bin/time_daemon

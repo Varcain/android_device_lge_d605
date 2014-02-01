@@ -34,7 +34,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/init.qcom.sh:root/init.qcom.sh \
 	$(LOCAL_PATH)/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
-	$(LOCAL_PATH)/scripts/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
@@ -90,10 +89,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
         e2fsck
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/scripts/init.qcom.bt.sh:system/bin/init.qcom.bt.sh
+
 PRODUCT_PACKAGES += \
-    hcitool \
-    hciconfig \
-    hwaddrs
+	hcitool \
+	hciconfig \
+	hwaddrs
 
 PRODUCT_PACKAGES += \
         libgenlock \
