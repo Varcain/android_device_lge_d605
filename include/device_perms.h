@@ -25,5 +25,6 @@
     { "com.google.clientidbase",   AID_SYSTEM,   AID_SYSTEM }, \
     { "com.google.clientidbase.",   AID_SYSTEM,   AID_SYSTEM }, \
     { "persist.service.brcm.bt.mac",   AID_BLUETOOTH,   AID_BLUETOOTH }, \
-    { "service.brcm.bt.", AID_BLUETOOTH, 0 },
+    { "service.brcm.bt.", AID_BLUETOOTH, 0 }, \
+    { "persist.camera.", AID_MEDIA, AID_MEDIA },
 #endif /* DEVICE_PERMS_H */
