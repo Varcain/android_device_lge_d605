@@ -1,0 +1,29 @@
+diff --git a/libril/ril.cpp b/libril/ril.cpp
+index f594b8d..2e93761 100644
+--- a/libril/ril.cpp
++++ b/libril/ril.cpp
+@@ -2233,7 +2233,7 @@ static int responseSimStatus(Parcel &p, void *response, size_t responselen) {
+         return RIL_ERRNO_INVALID_RESPONSE;
+     }
+ 
+-    if (responselen == sizeof (RIL_CardStatus_v6)) {
++    if (responselen == sizeof (RIL_CardStatus_v6) || responselen == 408) {
+         RIL_CardStatus_v6 *p_cur = ((RIL_CardStatus_v6 *) response);
+ 
+         p.writeInt32(p_cur->card_state);
+@@ -2254,7 +2254,14 @@ static int responseSimStatus(Parcel &p, void *response, size_t responselen) {
+ 
+         sendSimStatusAppInfo(p, p_cur->num_applications, p_cur->applications);
+     } else {
+-        ALOGE("responseSimStatus: A RilCardStatus_v6 or _v5 expected\n");
++        ALOGE("responseSimStatus: A RilCardStatus_v6 or _v5 expected but got len:%d\n", responselen);
++
++	unsigned char tmp;
++	for(int ii=0; ii<responselen; ii++) {
++	    tmp = *((char *) response + ii);
++            ALOGE("Byte %d = 0x%02x", ii, tmp);
++	}
++
+         return RIL_ERRNO_INVALID_RESPONSE;
+     }
+ 
