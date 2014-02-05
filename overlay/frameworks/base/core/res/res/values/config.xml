@@ -58,6 +58,9 @@
         <item>70</item>
     </integer-array>
 
+    <!-- Set to false or else wakelock problem happens. -->
+    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
+
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
 
