@@ -124,6 +124,7 @@ PRODUCT_PACKAGES += \
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing
 
+PRODUCT_PACKAGES += Torch
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_d605
