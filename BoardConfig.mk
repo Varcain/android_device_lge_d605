@@ -14,7 +14,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 
 TARGET_BOOTLOADER_BOARD_NAME := d605
 
-BOARD_KERNEL_CMDLINE := l9ii_open_eu user_debug=31 msm_rtb msm_rtb.filter=0x3F vmalloc=308M
+BOARD_KERNEL_CMDLINE := androidboot.hardware=d605 user_debug=31 msm_rtb msm_rtb.filter=0x3F vmalloc=308M
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x2000000
 BOARD_KERNEL_PAGESIZE := 2048
