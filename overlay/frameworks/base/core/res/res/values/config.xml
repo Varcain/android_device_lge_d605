@@ -51,11 +51,10 @@
 
     <integer-array name="config_safeModeEnabledVibePattern">
         <item>0</item>
-        <item>1</item>
-        <item>20</item>
-        <item>21</item>
-        <item>40</item>
-        <item>70</item>
+    </integer-array>
+
+    <integer-array name="config_safeModeDisabledVibePattern">
+        <item>0</item>
     </integer-array>
 
     <!-- Set to false or else wakelock problem happens. -->
@@ -80,15 +79,13 @@
 
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <integer-array name="config_virtualKeyVibePattern">
-        <item>7</item>
-        <item>14</item>
-        <item>17</item>
-        <item>20</item>
+        <item>21</item>
+        <item>24</item>
     </integer-array>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
-        <item>31</item>
+        <item>25</item>
     </integer-array>
 
     <bool name="config_ui_enableFadingMarquee">false</bool>
