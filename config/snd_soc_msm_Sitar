@@ -807,19 +807,24 @@ SectionVerb
 	Name "Voice Call"
 
 	EnableSequence
-	'SLIM_0_RX_Voice Mixer CSVoice':1:1
-	'Voice_Tx Mixer SLIM_0_TX_Voice':1:1
+		'SLIM_0_TX Channels':0:One
+		'SLIM TX1 MUX':0:DEC1
+		'DEC1 MUX':0:ADC1
+		'DEC1 Volume':1:60
+		'ADC1 Volume':1:100
+#		'MICBIAS1 CAPLESS Switch':1:1
 	EndSequence
 
 	DisableSequence
-	'SLIM_0_RX_Voice Mixer CSVoice':1:0
-	'Voice_Tx Mixer SLIM_0_TX_Voice':1:0
+		'SLIM TX1 MUX':0:ZERO
+		'DEC1 MUX':0:ZERO
+		'DEC1 Volume':1:0
+		'ADC1 Volume':1:0
+#		'MICBIAS1 CAPLESS Switch':1:0
 	EndSequence
-	
-	# ALSA PCMs
-	PlaybackPCM 2
-	CapturePCM 2
-	ACDBID 0:0
+
+	ACDBID	4:2
+	EffectsMixerCTL "SRS TruMedia"
 
 EndSection
 SectionVerb
