@@ -4,12 +4,6 @@ on early-init
     mkdir /firmware 0771 system system
     symlink /data/tombstones /tombstones
 
-# LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add immersion solution
-# Begin Immersion changes
-    export VIBE_PIPE_PATH /dev/pipes
-# End Immersion changes
-# LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
-
 on init
     export EXTERNAL_STORAGE /storage/sdcard0
 
@@ -274,12 +268,6 @@ on post-fs-data
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
 
-# LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add immersion solution
-# Begin Immersion changes
-    mkdir /dev/pipes 0771 shell shell
-# End Immersion changes
-# LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
-
    #LGDRM
     mkdir /persist-lg/lgdrm 0770 lgdrm lgdrm_acc
     chown lgdrm lgdrm_acc /persist-lg/lgdrm
@@ -373,11 +361,6 @@ on property:init.svc.surfaceflinger=stopped
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
-service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
-    class core
-    user root
-    oneshot
-
 service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
     class main
     user root
@@ -420,34 +403,8 @@ service hciattach /system/bin/init.qcom.bt.sh
     group bluetooth net_bt_admin qcom_oncrpc
     disabled
 
-service btld /system/bin/btld -hb 4000000 -pf /system/bin/BCM4330B1_002.001.003.0967.1019.hcd -lpm 1 -nice -16
-    user root
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-# start btld if soft_onoff is enabled
-on property:service.brcm.bt.soft_onoff=1
-    start btld
-
-# stop btld if soft_onoff is disabled
-on property:service.brcm.bt.soft_onoff=0
-    stop btld
-
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
-    user radio
-    group radio qcom_diag
-    disabled
-
-service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
-    class late_start
-    user system
-    group system inet
-    disabled
-
-service qmiproxy /system/bin/qmiproxy
-    class main
     user radio
     group radio qcom_diag
     disabled
@@ -471,24 +428,6 @@ on property:ro.use_data_netmgrd=false
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
-
-service amp_init /system/bin/amploader -i
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service amp_load /system/bin/amploader -l 7000
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service amp_unload /system/bin/amploader -u
-    class late_start
-    user root
-    disabled
-    oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -N \
@@ -540,39 +479,6 @@ service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
 
-service wiperiface /system/bin/wiperiface
-    class late_start
-    user gps
-    group gps qcom_oncrpc net_raw
-    oneshot
-
-#[COM_GNSS::COMMON][S][mc-gnss@lge.com][2012.10.23][disable xtwifi daemon]
-service location_mq /system/bin/location-mq
-    class late_start
-    user gps
-    group gps
-    disabled
-
-service xtwifi_inet /system/bin/xtwifi-inet-agent
-    class late_start
-    user gps
-    group inet gps
-    disabled
-
-service xtwifi_client /system/bin/xtwifi-client
-    class late_start
-    user gps
-    group net_admin wifi inet gps
-    disabled
-#[COM_GNSS::COMMON][E]
-
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system qcom_oncrpc
-    disabled
-    oneshot
-
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
      insmod /system/lib/modules/qcedev.ko
@@ -599,20 +505,9 @@ service qcom-post-fs /system/bin/sh /system/etc/init.qcom.post_fs.sh
     disabled
     oneshot
 
-service qcom-sh /system/bin/sh /init.qcom.sh
-    class late_start
-    user root
-    oneshot
-
 service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     class late_start
     user root
-    disabled
-    oneshot
-
-service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
-    class late_start
-    group wifi inet
     disabled
     oneshot
 
@@ -624,11 +519,6 @@ service atfwd /system/bin/ATFWD-daemon
     user system
     group system radio
     onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
-
-service hdmid /system/bin/hdmid
-    class late_start
-    socket hdmid stream 0660 root system graphics
-    disabled
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
@@ -652,15 +542,6 @@ service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 on property:persist.data.ds_fmc_app.mode=1
     start ds_fmc_appd
 
-service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
-    class late_start
-    user system
-    group qcom_oncrpc net_bt_admin inet radio wifi
-    disabled
-
-on property:persist.ims.regmanager.mode=1
-    start ims_regmanager
-
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
@@ -675,11 +556,6 @@ service time_daemon /system/bin/time_daemon
 on property:persist.timed.enable=true
     start time_daemon
 
-service battery_monitor /system/bin/battery_monitor
-    user system
-    group system
-    disabled
-
 service ril-daemon1 /system/bin/rild -c 1
     class main
     socket rild1 stream 660 root radio
@@ -687,12 +563,6 @@ service ril-daemon1 /system/bin/rild -c 1
     user root
     disabled
     group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
-
-service profiler_daemon /system/bin/profiler_daemon
-    class late_start
-    user root
-    group root
-    disabled
 
 service sdcard /system/bin/sdcard /data/media 1023 1023
     class late_start
@@ -746,21 +616,6 @@ service usf_epos /system/bin/usf_epos
     group system inet
     disabled
 
-service usf_gesture /system/bin/usf_gesture
-    user system
-    group system inet
-    disabled
-
-service usf_p2p /system/bin/usf_p2p
-    user system
-    group system inet
-    disabled
-
-service usf_hovering /system/bin/usf_hovering
-    user system
-    group system inet
-    disabled
-
 service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
     class late_start
     user root
@@ -800,33 +655,6 @@ service sensord /system/bin/sensord
     user root
     oneshot
 
-# LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add immersion solution
-# Begin Immersion changes
-# TouchSense Player Service
-service immvibed_L9ii /system/bin/immvibed_L9ii
-    class main
-    user shell
-    group shell
-    oneshot
-# End Immersion changes
-# LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
-
-service thermal_enable /system/bin/thermald --config-file /system/etc/thermald-8930.conf
-	class late_start
-	disabled
-	oneshot
-
-service thermal_disable /system/bin/thermald --config-file /system/etc/thermald-8930-empty.conf
-    class late_start
-	disabled
-	oneshot
-
-on property:persist.service.ther.enable=true
-	start thermal_enable
-
-on property:persist.service.ther.enable=false
-	start thermal_disable
-
 # LGE_CHANGE_S [daewon1004.kim@lge.com] 2013-03-21, Add fx3 same
 on property:persist.service.usb_ther=true
 on property:persist.service.usb_ther=false
@@ -846,11 +674,6 @@ on property:ro.reserve.blockcount=*
     exec /system/bin/tune2fs -r $ro.reserve.blockcount \
               -u system -g system $ro.reserve.userdata
 
-#CAPP_UNINSTALL_PRELOADED
-service post_install /system/vendor/bin/post_install.sh
-    disabled
-    oneshot
-
 #CAPP_POWEROFF_ANI
 service shutdownanim /system/bin/shutdownanimation
     user graphics
@@ -864,22 +687,6 @@ service nfsserversetup /system/bin/nfsserversetup
     user root
     oneshot
 
-#CAPP_MPROFILER
-service lgprofd /system/bin/lgprofd
-    socket lgprofd stream 666
-
-#Application Manager ENABLE_UNINSTALL
-service enable_uninstall  /system/vendor/bin/enable_uninstall.sh
-    disabled
-    oneshot
-
-#Application Manager ENABLE_UNINSTALL
-on property:vold.post_fs_data_done=1
-    start enable_uninstall
-
-########################################
-# CAPP_SECCLK
-########################################
 service lgsecclk /system/bin/lgsecclkserver
     class main
     user system
@@ -889,9 +696,6 @@ service lgsecclk /system/bin/lgsecclkserver
 on property:init.svc.servicemanager=restarting
      restart lgsecclk
 
-########################################
-# CAPP_DRM
-########################################
 service lgdrm /system/bin/lgdrmserver
     class main
     user lgdrm
@@ -900,3 +704,4 @@ service lgdrm /system/bin/lgdrmserver
 # restart when servicemanager is restarted
 on property:init.svc.servicemanager=restarting
      restart lgdrm
+
