@@ -24,6 +24,15 @@
         <item>"softap.*"</item>
     </string-array>
 
+    <string-array name="config_tether_bluetooth_regexs">
+        <item>bnep\\d</item>
+    </string-array>
+
+    <string-array name="config_tether_usb_regexs">
+        <item>usb\\d</item>
+        <item>rndis\\d</item>
+    </string-array>
+
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
 	<!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
@@ -33,6 +42,22 @@
         <item>5</item>
         <item>7</item>
     </integer-array>
+
+    <string-array name="networkAttributes">
+        <item>wifi,1,1,1,-1,true</item>
+        <item>mobile,0,0,0,-1,true</item>
+        <item>mobile_mms,2,0,2,60000,true</item>
+        <item>mobile_supl,3,0,2,60000,true</item>
+        <item>mobile_dun,4,0,2,-1,true</item>
+        <item>mobile_hipri,5,0,3,60000,true</item>
+        <item>mobile_fota,10,0,2,60000,true</item>
+        <item>mobile_ims,11,0,2,-1,true</item>
+        <item>mobile_cbs,12,0,2,60000,true</item>
+        <item>wifi_p2p,13,1,0,-1,true</item>
+        <item>bluetooth,7,7,2,-1,true</item>
+        <item>mobile_bip,17,0,4,-1,true</item>
+        <item>mobile_rcs,21,0,4,-1,true</item>
+    </string-array>
 
     <!-- This string array should be overridden by the device to present a list of radio
 	attributes. This is used by the connectivity manager to decide which networks can coexist
@@ -88,7 +113,7 @@
         <item>25</item>
     </integer-array>
 
-    <bool name="config_ui_enableFadingMarquee">false</bool>
+    <bool name="config_ui_enableFadingMarquee">true</bool>
 
 </resources>
 
