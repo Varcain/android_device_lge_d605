@@ -112,15 +112,13 @@ persist.radio.apm_sim_not_pwdn=1
 persist.radio.data_no_toggle=1
 # LGE_CHANGE_E
 
+ro.bt.bdaddr_path=/data/misc/bd_addr
 # Support BRCM hfp1.6 wbs property
 service.brcm.bt.wbs=1
-
 # Support BRCM aptx property
 service.brcm.bt.aptx=0
-
 # support 3-way call
 service.brcm.bt.3way_support=true
-
 # Support BRCM FM SNR property, HEX value limit (0~20)
 service.brcm.bt.fm_snr=E
 

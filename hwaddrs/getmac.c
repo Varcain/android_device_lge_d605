@@ -18,18 +18,37 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <cutils/properties.h>
-
-/* Read properties and set MAC addresses accordingly */
 
 int main() {
-	FILE *fd;
-	char mMacAddr[PROPERTY_VALUE_MAX];
+	FILE *config_fd = NULL;
+	FILE *nvram_fd = NULL;
+	unsigned char macbuf[6];
 
-	property_get("service.brcm.bt.mac",mMacAddr,"010203040506");
-	fd = fopen("/data/misc/bd_addr","w");
-	fprintf(fd,"%c%c:%c%c:%c%c:%c%c:%c%c:%c%c\n",mMacAddr[0], mMacAddr[1], mMacAddr[2], mMacAddr[3], mMacAddr[4], mMacAddr[5], mMacAddr[6], mMacAddr[7], mMacAddr[8], mMacAddr[9], mMacAddr[10], mMacAddr[11]);
-	fclose(fd);
+	nvram_fd = fopen("/dev/block/platform/msm_sdcc.1/by-name/misc", "r");
+	if ( nvram_fd == NULL ) {
+		return -1;
+	}
+	else {
+		/* Read BT MAC */
+		fseek(nvram_fd,0x4000,SEEK_SET);
+		fread(macbuf, 6, 1, nvram_fd);
+		config_fd = fopen("/data/misc/bd_addr","w");
+		fprintf(config_fd,"%02X:%02X:%02X:%02X:%02X:%02X",
+			macbuf[0], macbuf[1], macbuf[2],
+			macbuf[3], macbuf[4], macbuf[5]);
+		fclose(config_fd);
+
+		/* Read WLAN MAC */
+		fseek(nvram_fd,0x3000,SEEK_SET);
+		fread(macbuf, 6, 1, nvram_fd);
+		config_fd = fopen("/data/misc/wifi/config","w");
+		fprintf(config_fd,"cur_etheraddr=%02X:%02X:%02X:%02X:%02X:%02X",
+			macbuf[0], macbuf[1], macbuf[2],
+			macbuf[3], macbuf[4], macbuf[5]);
+		fclose(config_fd);
+
+		fclose(nvram_fd);
+	}
 
 	return 0;
 }
