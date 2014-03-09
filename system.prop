@@ -21,6 +21,8 @@ debug.composition.type=gpu
 debug.enable.wl_log=1
 debug.mdpcomp.maxlayer=3
 debug.mdpcomp.logs=0
+persist.sys.usb.config=mtp,adb
+com.qc.hardware=true
 
 #
 # system props for the cne module
