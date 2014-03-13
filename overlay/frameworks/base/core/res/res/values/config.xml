@@ -88,13 +88,12 @@
 
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <integer-array name="config_virtualKeyVibePattern">
-        <item>21</item>
-        <item>24</item>
+        <item>36</item>
     </integer-array>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
-        <item>25</item>
+        <item>30</item>
     </integer-array>
 
     <bool name="config_ui_enableFadingMarquee">true</bool>
