@@ -97,7 +97,7 @@ ro.telephony.ril_class=QualcommSharedRIL
 # LGE_CHANGE_S
 # If you use Internal-SD with FUSE, comment-out below
 # 2012-01-08 warkap.seo@lge.com
-#persist.fuse_sdcard=false
+persist.fuse_sdcard=false
 # LGE_CHANGE_E
 ro.hwui.text_cache_width=2048
 
