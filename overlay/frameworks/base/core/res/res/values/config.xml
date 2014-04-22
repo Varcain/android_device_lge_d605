@@ -54,8 +54,6 @@
        <item>"7,1"</item>
     </string-array>
 
-    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
-
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
 
     <integer-array name="config_safeModeEnabledVibePattern">
@@ -65,9 +63,6 @@
     <integer-array name="config_safeModeDisabledVibePattern">
         <item>0</item>
     </integer-array>
-
-    <!-- Set to false or else wakelock problem happens. -->
-    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
 
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
