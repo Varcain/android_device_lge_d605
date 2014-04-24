@@ -25,10 +25,14 @@ PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/init.d605.rc:root/init.d605.rc \
     	$(LOCAL_PATH)/ueventd.d605.rc:root/ueventd.d605.rc \
     	$(LOCAL_PATH)/fstab.d605:root/fstab.d605 \
-	$(LOCAL_PATH)/init.lge.usb.rc:root/init.lge.usb.rc \
-	$(LOCAL_PATH)/init.lge.usb.sh:root/init.lge.usb.sh \
-	$(LOCAL_PATH)/init.lge.cmm.usb.sh:root/init.lge.cmm.usb.sh \
-	$(LOCAL_PATH)/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+	$(LOCAL_PATH)/init.class_main.sh:root/init.class_main.sh \
+	$(LOCAL_PATH)/init.engdo.class_core.sh:root/init.engdo.class_core.sh \
+	$(LOCAL_PATH)/init.engdo.cmm.usb.sh:root/init.engdo.cmm.usb.sh \
+	$(LOCAL_PATH)/init.engdo.early_boot.sh:root/init.engdo.early_boot.sh \
+	$(LOCAL_PATH)/init.engdo.sh:root/init.engdo.sh \
+	$(LOCAL_PATH)/init.engdo.syspart_fixup.sh:root/init.engdo.syspart_fixup.sh \
+	$(LOCAL_PATH)/init.engdo.usb.rc:root/init.engdo.usb.rc \
+	$(LOCAL_PATH)/init.engdo.usb.sh:root/init.engdo.usb.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \

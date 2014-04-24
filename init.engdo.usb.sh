@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2012, The Linux Foundation. All rights reserved.
 # Copyright (c) 2012, LG Electronics Inc. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -11,7 +11,7 @@
 #       copyright notice, this list of conditions and the following
 #       disclaimer in the documentation and/or other materials provided
 #       with the distribution.
-#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#     * Neither the name of The Linux Foundation nor the names of its
 #       contributors may be used to endorse or promote products derived
 #      from this software without specific prior written permission.
 #
@@ -34,55 +34,22 @@
 # if persistent serial number is not set then Update USB serial number if
 # passed from command line
 #
-
-#
-# Instead of ro.serialno, we use model name + chipset id as usb serial number.
-#
 serialno=`getprop persist.usb.serialno`
 case "$serialno" in
     "")
-    # usb serial number is not acceptable such as "VS930 4G"
-    # so, we apply model name without space. note that it is only for VS930.
-    # CAUTION: DON'T USE THIS CODE FOR OTHER MODEL!
-    # model="FX3"
-    model=`getprop ro.product.model`
     serialnum=`getprop ro.serialno`
-    chipsetid=`cat /sys/devices/system/soc/soc0/serial_number`
-    case "chipsetid" in
-        "")
-        echo "$model-$serialnum" > /sys/class/android_usb/android0/iSerial
-        ;;
+    case "$serialnum" in
+        "") ;;
         * )
-        echo "$model-$chipsetid" > /sys/class/android_usb/android0/iSerial
-        ;;
+        echo "$serialnum" > /sys/class/android_usb/android0/iSerial
     esac
     ;;
     * )
     echo "$serialno" > /sys/class/android_usb/android0/iSerial
 esac
 
-chown root.system /sys/devices/platform/msm_hsusb/gadget/wakeup
-chmod 220 /sys/devices/platform/msm_hsusb/gadget/wakeup
-
-#
-# Allow persistent usb charging disabling
-# User needs to set usb charging disabled in persist.usb.chgdisabled
-#
-# target=`getprop ro.board.platform`
-# usbchgdisabled=`getprop persist.usb.chgdisabled`
-# case "$usbchgdisabled" in
-#   "") ;; #Do nothing here
-#    * )
-#    case $target in
-#        "msm8660")
-#        echo "$usbchgdisabled" > /sys/module/pmic8058_charger/parameters/disabled
-#        echo "$usbchgdisabled" > /sys/module/smb137b/parameters/disabled
-#	;;
-#        "msm8960")
-#        echo "$usbchgdisabled" > /sys/module/pm8921_charger/parameters/disabled
-#	;;
-#    esac
-#esac
+chown -h root.system /sys/devices/platform/msm_hsusb/gadget/wakeup
+chmod -h 220 /sys/devices/platform/msm_hsusb/gadget/wakeup
 
 devicename=`getprop ro.product.model`
 case $devicename in
