@@ -83,6 +83,7 @@ lib/libtime_genoff.so
 lib/libdsi_netctrl.so
 lib/libqdi.so
 lib/libqdp.so
+lib/libril.so
 
 # Bin
 bin/qmuxd
