@@ -51,8 +51,8 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/max1187x_touchscreen_0.idc:system/usr/idc/max1187x_touchscreen_0.idc \
 	$(LOCAL_PATH)/config/thermald-empty.conf:system/etc/thermald-empty.conf \
 	$(LOCAL_PATH)/config/thermald.conf:system/etc/thermald.conf \
-	$(LOCAL_PATH)/config/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-	$(LOCAL_PATH)/config/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
+	$(LOCAL_PATH)/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+	$(LOCAL_PATH)/config/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
 	$(LOCAL_PATH)/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
 	$(LOCAL_PATH)/config/qosmgr_rules.xml:system/etc/qosmgr_rules.xml \
 	$(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
@@ -108,11 +108,15 @@ PRODUCT_PACKAGES += \
 	libOmxCore
 
 PRODUCT_PACKAGES += \
-       audio_policy.msm8960 \
-       audio.primary.msm8960 \
-       audio.a2dp.default \
-       audio.usb.default \
-       libaudio-resampler
+	audio_policy.msm8960 \
+	audio.primary.msm8960 \
+	audio.a2dp.default \
+	audio.usb.default \
+	libaudio-resampler \
+	audio.r_submix.default
+
+PRODUCT_PACKAGES += \
+	libnetcmdiface
 
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing

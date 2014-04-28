@@ -56,7 +56,7 @@ WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_P2P := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcmdhd.ko"
-WIFI_DRIVER_MODULE_ARG := "iface_name=wlan0 firmware_path=/system/vendor/firmware/fw_bcmdhd.bin nvram_path=/system/etc/wifi/bcmdhd.cal"
+WIFI_DRIVER_MODULE_ARG := "iface_name=wlan0 firmware_path=/system/etc/firmware/fw_bcmdhd.bin nvram_path=/system/etc/wifi/bcmdhd.cal"
 WIFI_DRIVER_MODULE_NAME := "bcmdhd"
 
 TARGET_NO_RADIOIMAGE := true
@@ -67,6 +67,7 @@ TARGET_NEEDS_BLUETOOTH_INIT_DELAY := true
 
 BOARD_USES_ALSA_AUDIO:= true
 BOARD_USES_LEGACY_ALSA_AUDIO:= false
+#TARGET_QCOM_AUDIO_VARIANT := caf
 #BOARD_USES_FLUENCE_INCALL := true
 #BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
