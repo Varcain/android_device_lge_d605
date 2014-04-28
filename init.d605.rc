@@ -228,7 +228,7 @@ on boot
 
 on post-fs
     start sreadahead
-    export LD_PRELOAD /system/lib/libNimsWrap.so
+    #export LD_PRELOAD /system/lib/libNimsWrap.so
     export_rc /persist/init.cne.rc
     start qcom-post-fs	
     chown system system /persist-lg
