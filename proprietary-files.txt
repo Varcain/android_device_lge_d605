@@ -84,11 +84,28 @@ lib/libdsi_netctrl.so
 lib/libqdi.so
 lib/libqdp.so
 lib/libril.so
+#lib/libNimsWrap.so
+#lib/libcnefeatureconfig.so
+lib/hw/sensors_qcom.so
+lib/hw/sensors.default.so
+lib/liblgftmitem.so
+lib/libsensor1.so
+lib/libsensor_reg.so
+lib/libnfc.so
+lib/libnfc-brcm-nci.so
+lib/liblgdrm.so
+lib/liblgsecclk.so
+lib/libwvoemprov.so
+lib/libQSEEComAPI.so
+lib/libdiagd_client.so
+lib/libbluedroid_bdt.so
 
 # Bin
 bin/qmuxd
 bin/netmgrd
 bin/rmt_storage
+bin/sensord
+bin/atd
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
