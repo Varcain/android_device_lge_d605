@@ -117,6 +117,7 @@ bin/cnd
 bin/time_daemon
 bin/qseecomd
 bin/ssr_diag
+bin/lgsecclkserver
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
