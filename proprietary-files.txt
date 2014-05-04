@@ -113,6 +113,7 @@ bin/sensord
 bin/atd
 bin/imsqmidaemon
 bin/cnd
+bin/time_daemon
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
