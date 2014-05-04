@@ -874,12 +874,6 @@ service time_daemon /system/bin/time_daemon
    user root
    group root
 
-service bnrd /system/bin/bnrd
-         class main
-         socket bnrd stream 660 root system
-         user root
-         group system radio sdcard_rw
-
 service imsqmidaemon /system/bin/imsqmidaemon
     class main
     user system
@@ -1022,13 +1016,6 @@ on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 0
     restart adbd
     write /sys/class/android_usb/android0/enable 1
-
-# LGBackup SystemService Daemon
-service bnrd /system/bin/bnrd
-    class main
-    socket bnrd stream 660 root system
-    user root
-    group system radio sdcard_rw
 
 service irrcServer /system/bin/irrcServer
     class main
