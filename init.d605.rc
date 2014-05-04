@@ -610,18 +610,6 @@ service gpsone_daemon /system/bin/gpsone_daemon
     group gps qcom_oncrpc inet net_raw
     disabled
 
-service quipc_igsn /system/bin/quipc_igsn
-    class late_start
-    user gps
-    group inet gps
-    disabled
-
-service quipc_main /system/bin/quipc_main
-    class late_start
-    user gps
-    group gps net_admin wifi inet
-    disabled
-
 service fm_dl /system/bin/sh /system/etc/init.engdo.fm.sh
     class late_start
     user root
