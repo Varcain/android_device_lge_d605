@@ -106,6 +106,7 @@ bin/netmgrd
 bin/rmt_storage
 bin/sensord
 bin/atd
+bin/imsqmidaemon
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
