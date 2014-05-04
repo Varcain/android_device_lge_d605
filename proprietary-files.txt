@@ -119,6 +119,7 @@ bin/qseecomd
 bin/ssr_diag
 bin/lgsecclkserver
 bin/lgdrmserver
+bin/ssbd
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
