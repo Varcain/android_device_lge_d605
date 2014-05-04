@@ -85,7 +85,6 @@ lib/libqdi.so
 lib/libqdp.so
 lib/libril.so
 #lib/libNimsWrap.so
-#lib/libcnefeatureconfig.so
 lib/hw/sensors_qcom.so
 lib/hw/sensors.default.so
 lib/liblgftmitem.so
@@ -99,6 +98,12 @@ lib/libwvoemprov.so
 lib/libQSEEComAPI.so
 lib/libdiagd_client.so
 lib/libbluedroid_bdt.so
+lib/libcneutils.so
+lib/libcneqmiutils.so
+lib/libxml.so
+lib/libxml2.so
+lib/libcnefeatureconfig.so
+lib/libcneapiclient.so
 
 # Bin
 bin/qmuxd
@@ -107,6 +112,7 @@ bin/rmt_storage
 bin/sensord
 bin/atd
 bin/imsqmidaemon
+bin/cnd
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
