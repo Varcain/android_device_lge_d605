@@ -622,12 +622,6 @@ service quipc_main /system/bin/quipc_main
     group gps net_admin wifi inet
     disabled
 
-service location_mq /system/bin/location-mq
-    class late_start
-    user gps
-    group gps
-    disabled
-
 service fm_dl /system/bin/sh /system/etc/init.engdo.fm.sh
     class late_start
     user root
