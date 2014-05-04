@@ -104,6 +104,7 @@ lib/libxml.so
 lib/libxml2.so
 lib/libcnefeatureconfig.so
 lib/libcneapiclient.so
+lib/libdrmfs.so
 
 # Bin
 bin/qmuxd
@@ -114,6 +115,7 @@ bin/atd
 bin/imsqmidaemon
 bin/cnd
 bin/time_daemon
+bin/qseecomd
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
