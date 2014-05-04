@@ -68,8 +68,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/config/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
 	$(LOCAL_PATH)/config/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
 	$(LOCAL_PATH)/config/max1187x_touchscreen_0.idc:system/usr/idc/max1187x_touchscreen_0.idc \
-	$(LOCAL_PATH)/config/thermald-empty.conf:system/etc/thermald-empty.conf \
-	$(LOCAL_PATH)/config/thermald.conf:system/etc/thermald.conf \
+	$(LOCAL_PATH)/config/thermald-8930.conf:system/etc/thermald-8930.conf \
 	$(LOCAL_PATH)/config/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	$(LOCAL_PATH)/config/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
 	$(LOCAL_PATH)/config/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
