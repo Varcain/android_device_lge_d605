@@ -33,10 +33,29 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/init.engdo.syspart_fixup.sh:root/init.engdo.syspart_fixup.sh \
 	$(LOCAL_PATH)/init.engdo.usb.rc:root/init.engdo.usb.rc \
 	$(LOCAL_PATH)/init.engdo.usb.sh:root/init.engdo.usb.sh \
-	$(LOCAL_PATH)/scripts/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh \
-	$(LOCAL_PATH)/scripts/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
-	$(LOCAL_PATH)/scripts/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-	$(LOCAL_PATH)/scripts/init.qcom.post_fs.sh:system/etc/init.qcom.post_fs.sh \
+	$(LOCAL_PATH)/scripts/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
+	$(LOCAL_PATH)/scripts/init.crda.sh:system/etc/init.crda.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.audio.sh:system/etc/init.engdo.audio.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.btdun.sh:system/etc/init.engdo.btdun.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.bt.sh:system/etc/init.engdo.bt.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.coex.sh:system/etc/init.engdo.coex.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.efs.sync.sh:system/etc/init.engdo.efs.sync.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.fm.sh:system/etc/init.engdo.fm.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.mdm_links.sh:system/etc/init.engdo.mdm_links.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.modem_links.sh:system/etc/init.engdo.modem_links.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.post_boot.sh:system/etc/init.engdo.post_boot.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.sdio.sh:system/etc/init.engdo.sdio.sh \
+	$(LOCAL_PATH)/scripts/init.engdo.wifi.sh:system/etc/init.engdo.wifi.sh \
+	$(LOCAL_PATH)/scripts/last_kmsg_backup.sh:system/etc/last_kmsg_backup.sh \
+	$(LOCAL_PATH)/scripts/logging_android_apart.sh:system/etc/logging_android_apart.sh \
+	$(LOCAL_PATH)/scripts/logging_android.sh:system/etc/logging_android.sh \
+	$(LOCAL_PATH)/scripts/logging_kernel_apart.sh:system/etc/logging_kernel_apart.sh \
+	$(LOCAL_PATH)/scripts/logging_kernel.sh:system/etc/logging_kernel.sh \
+	$(LOCAL_PATH)/scripts/logging_prepare.sh:system/etc/logging_prepare.sh \
+	$(LOCAL_PATH)/scripts/make_packet_log.sh:system/etc/make_packet_log.sh \
+	$(LOCAL_PATH)/scripts/save_kernel_log_ats.sh:system/etc/save_kernel_log_ats.sh \
+	$(LOCAL_PATH)/scripts/save_kernel_log.sh:system/etc/save_kernel_log.sh \
+	$(LOCAL_PATH)/scripts/usf_post_boot.sh:system/etc/usf_post_boot.sh
 
 # Configs
 PRODUCT_COPY_FILES += \
@@ -83,9 +102,6 @@ PRODUCT_COPY_FILES += \
 # Filesystem management tools
 PRODUCT_PACKAGES += \
         e2fsck
-
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/scripts/init.qcom.bt.sh:system/bin/init.qcom.bt.sh
 
 PRODUCT_PACKAGES += \
 	hcitool \
