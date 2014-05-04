@@ -116,6 +116,7 @@ bin/imsqmidaemon
 bin/cnd
 bin/time_daemon
 bin/qseecomd
+bin/ssr_diag
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
