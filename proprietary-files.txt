@@ -121,6 +121,7 @@ bin/lgsecclkserver
 bin/lgdrmserver
 bin/ssbd
 bin/thermald
+bin/mpdecision
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
