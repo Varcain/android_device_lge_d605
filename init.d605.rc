@@ -628,12 +628,6 @@ service location_mq /system/bin/location-mq
     group gps
     disabled
 
-service lowi-server /system/bin/lowi-server
-    class late_start
-    user gps
-    group gps net_admin wifi inet
-    disabled
-
 service fm_dl /system/bin/sh /system/etc/init.engdo.fm.sh
     class late_start
     user root
