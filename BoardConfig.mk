@@ -31,7 +31,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/d605
-TARGET_KERNEL_CONFIG := l9ii_nfc_defconfig
+TARGET_KERNEL_CONFIG := l9ii_open_eu_defconfig
 
 TARGET_RECOVERY_FSTAB = device/lge/d605/fstab.d605
 RECOVERY_FSTAB_VERSION = 2
@@ -55,9 +55,6 @@ WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_P2P := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcmdhd.ko"
-WIFI_DRIVER_MODULE_ARG := "iface_name=wlan0 firmware_path=/system/etc/firmware/fw_bcmdhd.bin nvram_path=/system/etc/wifi/bcmdhd.cal"
-WIFI_DRIVER_MODULE_NAME := "bcmdhd"
 
 TARGET_NO_RADIOIMAGE := true
 
