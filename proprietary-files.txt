@@ -69,6 +69,14 @@ lib/hw/lights.msm8960.so
 # Audio
 lib/libacdbloader.so
 
+# GPS
+lib/hw/gps.default.so
+lib/libloc_api_v02.so
+lib/libloc_core.so
+lib/libloc_ds_api.so
+lib/libloc_eng.so
+lib/libgps.utils.so
+
 # Misc
 lib/libqmi.so
 lib/libqmi_client_qmux.so
