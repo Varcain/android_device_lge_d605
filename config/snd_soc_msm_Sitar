@@ -3936,9 +3936,9 @@ SectionDevice
 	EnableSequence
 		'SLIM_0_TX Channels':0:One
 		'SLIM TX1 MUX':0:DEC1
-		'DEC1 MUX':0:ADC3
+		'DEC1 MUX':0:ADC1
 		'DEC1 Volume':1:60
-		'ADC3 Volume':1:100
+		'ADC1 Volume':1:100
 #		'MICBIAS1 CAPLESS Switch':1:1
 	EndSequence
 
@@ -3946,7 +3946,7 @@ SectionDevice
 		'SLIM TX1 MUX':0:ZERO
 		'DEC1 MUX':0:ZERO
 		'DEC1 Volume':1:0
-		'ADC3 Volume':1:0
+		'ADC1 Volume':1:0
 #		'MICBIAS1 CAPLESS Switch':1:0
 	EndSequence
 
