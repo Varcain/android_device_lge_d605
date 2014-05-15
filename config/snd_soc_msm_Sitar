@@ -3590,6 +3590,35 @@ SectionDevice
 
 EndSection
 
+SectionDevice
+	Name "Voice Speaker"
+	Comment "Voice Speaker Rx device"
+
+	EnableSequence
+		'SLIM_0_RX Channels':0:One
+		'RX1 MIX1 INP1':0:RX1
+		'DAC3 MUX':0:INV_RX1
+		'DAC2 MUX':0:RX1
+		'RX1 Digital Volume':1:60
+		'LINEOUT1 Volume':1:100
+		'LINEOUT2 Volume':1:100
+		'PMIC SPK Gain':0:POS_10_DB
+	EndSequence
+
+	DisableSequence
+		'RX1 MIX1 INP1':0:ZERO
+		'DAC3 MUX':0:ZERO
+		'DAC2 MUX':0:ZERO
+		'RX1 Digital Volume':1:0
+		'LINEOUT1 Volume':1:0
+		'LINEOUT2 Volume':1:0
+		'PMIC SPK Gain':0:POS_0_DB
+	EndSequence
+	ACDBID	15:1
+	EffectsMixerCTL "SRS TruMedia"
+	EC_REF_RXMixerCTL "SLIM_RX"
+
+EndSection
 
 SectionDevice
 	Name "Headphones"
