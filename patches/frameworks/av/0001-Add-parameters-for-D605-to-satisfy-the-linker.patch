@@ -1,0 +1,47 @@
+From be89dfc7077058b796558237961d4e13b297a668 Mon Sep 17 00:00:00 2001
+From: Kamil Lulko <rev13@wp.pl>
+Date: Sun, 18 May 2014 22:58:34 +0200
+Subject: [PATCH] Add parameters for D605 to satisfy the linker
+
+Change-Id: Ib0e8aa655a8a25e74873d899d532d7a078cb530c
+---
+ camera/CameraParameters.cpp       |    5 +++++
+ include/camera/CameraParameters.h |    6 ++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/camera/CameraParameters.cpp b/camera/CameraParameters.cpp
+index 4935c74..77130fd 100644
+--- a/camera/CameraParameters.cpp
++++ b/camera/CameraParameters.cpp
+@@ -338,6 +338,11 @@ const char CameraParameters::SCENE_MODE_FLOWERS[] = "flowers";
+ #endif
+ const char CameraParameters::SCENE_MODE_BARCODE[] = "barcode";
+ 
++// Varcain: feed the linker with symbols
++const char CameraParameters::KEY_LUMINANCE_CONDITION[] = "key-luminance-condition";
++const char CameraParameters::LUMINANCE_CONDITION_HIGH[] = "luminance-condition-high";
++const char CameraParameters::LUMINANCE_CONDITION_LOW[] = "luminance-condition-low";
++
+ const char CameraParameters::SCENE_MODE_HDR[] = "hdr";
+ #ifdef QCOM_HARDWARE
+ const char CameraParameters::SCENE_MODE_AR[] = "AR";
+diff --git a/include/camera/CameraParameters.h b/include/camera/CameraParameters.h
+index 4a5ec8f..2aa0f03 100644
+--- a/include/camera/CameraParameters.h
++++ b/include/camera/CameraParameters.h
+@@ -851,6 +851,12 @@ public:
+     // Applications are looking for a barcode. Camera driver will be optimized
+     // for barcode reading.
+     static const char SCENE_MODE_BARCODE[];
++
++    // Varcain: feed the linker with symbols
++    static const char KEY_LUMINANCE_CONDITION[];
++    static const char LUMINANCE_CONDITION_HIGH[];
++    static const char LUMINANCE_CONDITION_LOW[];
++
+     // A high-dynamic range mode. In this mode, the HAL module will use a
+     // capture strategy that extends the dynamic range of the captured
+     // image in some fashion. Only the final image is returned.
+-- 
+1.7.9.5
+
