@@ -122,7 +122,8 @@ PRODUCT_PACKAGES += \
 	libOmxVdec \
 	libOmxVenc \
 	libmm-omxcore \
-	libOmxCore
+	libOmxCore \
+	libOmxAacEnc
 
 PRODUCT_PACKAGES += \
 	audio_policy.msm8960 \
