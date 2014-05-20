@@ -82,6 +82,7 @@ ro.bluetooth.request.master=true
 #
 # system prop for Bluetooth Auto connect for remote initated connections
 #
+ro.bt.bdaddr_path=/data/misc/bd_addr
 ro.bluetooth.remote.autoconnect=true
 # system property for Bluetooth discoverability time out in seconds
 # 0: Always discoverable

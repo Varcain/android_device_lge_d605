@@ -134,7 +134,8 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default
 
 PRODUCT_PACKAGES += \
-	libnetcmdiface
+	libnetcmdiface \
+	hwaddrs
 
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing
