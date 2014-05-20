@@ -68,6 +68,7 @@ lib/hw/lights.msm8960.so
 
 # Audio
 lib/libacdbloader.so
+lib/libaudcal.so
 
 # GPS
 lib/hw/gps.default.so
