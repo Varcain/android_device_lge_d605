@@ -191,4 +191,5 @@ etc/firmware/vidc.b02
 etc/firmware/vidc.b03
 etc/firmware/vidcfw.elf
 etc/firmware/vidc.mdt
+bin/BCM43341B0_002.001.014.0064.0071.hcd
 
