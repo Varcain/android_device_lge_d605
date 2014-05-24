@@ -78,6 +78,11 @@ lib/libloc_ds_api.so
 lib/libloc_eng.so
 lib/libgps.utils.so
 
+# NFC
+lib/hw/nfc_lg.default.so
+lib/libnfc-brcm-nci.so
+lib/libLGnfc_config.so
+
 # Camera
 lib/hw/camera.msm8960.so
 lib/liboemcamera.so
@@ -135,7 +140,6 @@ lib/liblgftmitem.so
 lib/libsensor1.so
 lib/libsensor_reg.so
 lib/libnfc.so
-lib/libnfc-brcm-nci.so
 lib/liblgdrm.so
 lib/liblgsecclk.so
 lib/libwvoemprov.so
@@ -192,4 +196,6 @@ etc/firmware/vidc.b03
 etc/firmware/vidcfw.elf
 etc/firmware/vidc.mdt
 bin/BCM43341B0_002.001.014.0064.0071.hcd
+vendor/firmware/BCM43341NFCB0_002.001.009.0031.0044_Generic_I2C_NCD_Signed_configdata.ncd
+vendor/firmware/BCM43341NFCB0_002.001.009.0031.0044_Generic_PreI2C_NCD_Signed_configdata.ncd
 

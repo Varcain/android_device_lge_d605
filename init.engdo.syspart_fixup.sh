@@ -65,6 +65,11 @@ if [ -f /system/etc/init.engdo.wifi.sh ]; then
   /system/bin/sh /system/etc/init.engdo.wifi.sh "$target" "$serial"
 fi
 
+# Run nfc fixup script
+if [ -f /system/etc/init.varcain.nfc_fixup.sh ]; then
+  /system/bin/sh /system/etc/init.varcain.nfc_fixup.sh
+fi
+
 touch /system/etc/boot_fixup
 
 if $mount_needed ;then
