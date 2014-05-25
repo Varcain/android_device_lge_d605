@@ -34,7 +34,6 @@ export PATH
 
 # Varcain: make a symlink from LG blob to link with AOSP NFC stuff
 mount -o rw,remount,barrier=1 /system
-rm -f /system/lib/libnfc-nci.so
-ln -s /system/lib/libnfc-brcm-nci.so /system/lib/libnfc-nci.so 2>/dev/null
+ln -s /system/lib/hw/nfc_lg.default.so /system/lib/hw/nfc_nci.d605.so 2>/dev/null
 mount -o ro,remount,barrier=1 /system
 
