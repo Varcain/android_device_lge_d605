@@ -1,0 +1,29 @@
+From fb7af85ecfb2194239f4479f6b5993221da9c7fc Mon Sep 17 00:00:00 2001
+From: Kamil Lulko <rev13@wp.pl>
+Date: Sun, 8 Jun 2014 23:44:15 +0200
+Subject: [PATCH] Fix ACDB tx device ID for voice call use case
+
+Change-Id: I00620eec28f009a7de3b985d4e653eaa7760b3ba
+---
+ legacy/libalsa-intf/alsa_ucm.c |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/legacy/libalsa-intf/alsa_ucm.c b/legacy/libalsa-intf/alsa_ucm.c
+index 89bd9a1..e5fe039 100644
+--- a/legacy/libalsa-intf/alsa_ucm.c
++++ b/legacy/libalsa-intf/alsa_ucm.c
+@@ -802,6 +802,11 @@ int use_case_index)
+                     && tx_id == DEVICE_HANDSET_TX_FV5_ACDB_ID) {
+                     tx_id = DEVICE_SPEAKER_TX_FV5_ACDB_ID;
+                 }
++		if(rx_id == DEVICE_HANDSET_RX_ACDB_ID && tx_id == DEVICE_SPEAKER_TX_ACDB_ID) {
++			tx_id = DEVICE_HANDSET_TX_ACDB_ID;
++			ALOGD("Varcain: mic ACDB workaround");
++		}
++
+ /* Despite no change in rx and tx devices, calibration data can be required to be sent.
+ This happens when the modifier changes*/
+                     uc_mgr->current_rx_device = rx_id;
+-- 
+1.7.9.5
+
