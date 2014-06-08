@@ -166,7 +166,7 @@ bin/time_daemon
 bin/qseecomd
 bin/ssr_diag
 bin/lgsecclkserver
-bin/lgdrmserver
+#bin/lgdrmserver
 bin/ssbd
 bin/thermald
 bin/mpdecision
