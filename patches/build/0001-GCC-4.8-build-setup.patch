@@ -1,0 +1,53 @@
+From 47ab70cfbc51ade5363d680d53180849602cf2d3 Mon Sep 17 00:00:00 2001
+From: Kamil Lulko <rev13@wp.pl>
+Date: Sun, 8 Jun 2014 03:49:22 +0200
+Subject: [PATCH] GCC 4.8 build setup
+
+Change-Id: I5c6fe04746fd64de2fb1f857b8e4a42ba6969b1d
+---
+ core/combo/TARGET_linux-arm.mk |    8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/core/combo/TARGET_linux-arm.mk b/core/combo/TARGET_linux-arm.mk
+index 3497662..0984f2d 100644
+--- a/core/combo/TARGET_linux-arm.mk
++++ b/core/combo/TARGET_linux-arm.mk
+@@ -35,7 +35,7 @@ TARGET_ARCH_VARIANT := armv5te
+ endif
+ 
+ ifeq ($(strip $(TARGET_GCC_VERSION_EXP)),)
+-TARGET_GCC_VERSION := 4.7
++TARGET_GCC_VERSION := 4.8
+ else
+ TARGET_GCC_VERSION := $(TARGET_GCC_VERSION_EXP)
+ endif
+@@ -75,7 +75,7 @@ TARGET_arm_CFLAGS :=    -O2 \
+ 
+ # Modules can choose to compile some source as thumb.
+ TARGET_thumb_CFLAGS :=  -mthumb \
+-                        -Os \
++                        -O2 \
+                         -fomit-frame-pointer \
+                         -fno-strict-aliasing
+ 
+@@ -113,6 +113,8 @@ TARGET_GLOBAL_CFLAGS += \
+ 			-Werror=format-security \
+ 			-D_FORTIFY_SOURCE=2 \
+ 			-fno-short-enums \
++			-Wno-error=unused-parameter \
++			-Wno-error=unused-variable \
+ 			$(arch_variant_cflags) \
+ 			-include $(android_config_h) \
+ 			-I $(dir $(android_config_h))
+@@ -121,7 +123,7 @@ TARGET_GLOBAL_CFLAGS += \
+ # We cannot turn it off blindly since the option is not available
+ # in gcc-4.4.x.  We also want to disable sincos optimization globally
+ # by turning off the builtin sin function.
+-ifneq ($(filter 4.6 4.6.% 4.7 4.7.%, $(TARGET_GCC_VERSION)),)
++ifneq ($(filter 4.6 4.6.% 4.7 4.7.% 4.8 4.8.% 4.9 4.9.%, $(TARGET_GCC_VERSION)),)
+ TARGET_GLOBAL_CFLAGS += -Wno-unused-but-set-variable -fno-builtin-sin \
+ 			-fno-strict-volatile-bitfields
+ endif
+-- 
+1.7.9.5
+
