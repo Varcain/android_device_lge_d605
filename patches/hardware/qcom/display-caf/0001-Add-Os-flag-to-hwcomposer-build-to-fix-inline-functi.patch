@@ -1,0 +1,27 @@
+From 0ee96088668b1c68ddf2ee014c8c9a96160aa1e4 Mon Sep 17 00:00:00 2001
+From: Kamil Lulko <rev13@wp.pl>
+Date: Sat, 21 Jun 2014 18:27:50 +0200
+Subject: [PATCH] Add -Os flag to hwcomposer build to fix inline function link
+ error
+
+Change-Id: I0a607e9c775164cabbdf4af1446c25e2588e514c
+---
+ libhwcomposer/Android.mk |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libhwcomposer/Android.mk b/libhwcomposer/Android.mk
+index 8bd5608..b197389 100644
+--- a/libhwcomposer/Android.mk
++++ b/libhwcomposer/Android.mk
+@@ -12,7 +12,7 @@ LOCAL_SHARED_LIBRARIES        := $(common_libs) libEGL liboverlay \
+                                  libexternal libqdutils libhardware_legacy \
+                                  libdl libmemalloc libqservice libsync \
+                                  libbinder libmedia libvirtual libskia
+-LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"qdhwcomposer\"
++LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"qdhwcomposer\" -Os
+ LOCAL_ADDITIONAL_DEPENDENCIES := $(common_deps)
+ LOCAL_SRC_FILES               := hwc.cpp          \
+                                  hwc_utils.cpp    \
+-- 
+1.7.9.5
+
