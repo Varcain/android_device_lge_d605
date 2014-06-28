@@ -255,6 +255,9 @@ on post-fs-data
 
     mkdir /data/log 0755 system system
 
+    # time_daemon storage
+    mkdir /data/time/ 0700 system system
+
     # permissions for PROXIMITY SENSOR
     chown system system /sys/devices/i2c-12/12-0039/enable_ps_sensor
     chown system system /sys/devices/i2c-12/12-0039/run_calibration

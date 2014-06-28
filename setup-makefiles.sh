@@ -65,6 +65,7 @@ PRODUCT_COPY_FILES := \\
 packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 PRODUCT_PACKAGES += libacdbloader
+PRODUCT_PACKAGES += libtime_genoff
 
 # Pick up overlay for features that depend on non-open-source files
 DEVICE_PACKAGE_OVERLAYS := vendor/$VENDOR/$DEVICE/overlay
@@ -117,6 +118,15 @@ include \$(CLEAR_VARS)
 LOCAL_MODULE := libacdbloader
 LOCAL_MODULE_OWNER := qcom
 LOCAL_SRC_FILES := proprietary/lib/libacdbloader.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := libtime_genoff
+LOCAL_MODULE_OWNER := qcom
+LOCAL_SRC_FILES := proprietary/lib/libtime_genoff.so
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
