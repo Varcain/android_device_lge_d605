@@ -176,7 +176,7 @@ on boot
 
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     exec system/bin/btnvtool -O
-    chown media media /dev/msm_IRRC_pcm_dec
+    chown system system /dev/msm_IRRC_pcm_dec
     chmod 0660 /dev/msm_IRRC_pcm_dec
     
 # LGE_CHANGE_S, [LGE_DATA][L9II], Re-define TCP buffer size for EU network, hwansuk.kang@lge.com, 2013-06-18
