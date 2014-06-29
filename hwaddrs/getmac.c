@@ -19,37 +19,36 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-int main() {
+int main()
+{
 	FILE *config_fd = NULL;
 	FILE *nvram_fd = NULL;
 	unsigned char macbuf[6];
 
 	nvram_fd = fopen("/dev/block/platform/msm_sdcc.1/by-name/misc", "r");
-	if ( nvram_fd == NULL ) {
+	if(NULL == nvram_fd) {
 		return -1;
-	}
-	else {
+	} else {
 		/* Read BT MAC */
-		fseek(nvram_fd,0x4000,SEEK_SET);
+		fseek(nvram_fd, 0x4000, SEEK_SET);
 		fread(macbuf, 6, 1, nvram_fd);
-		config_fd = fopen("/data/misc/bd_addr","w");
-		fprintf(config_fd,"%02X:%02X:%02X:%02X:%02X:%02X",
+		config_fd = fopen("/data/misc/bd_addr", "w");
+		fprintf(config_fd, "%02X:%02X:%02X:%02X:%02X:%02X",
 			macbuf[0], macbuf[1], macbuf[2],
 			macbuf[3], macbuf[4], macbuf[5]);
 		fclose(config_fd);
 
 		/* Read WLAN MAC */
-		fseek(nvram_fd,0x3000,SEEK_SET);
+		fseek(nvram_fd, 0x3000, SEEK_SET);
 		fread(macbuf, 6, 1, nvram_fd);
-		config_fd = fopen("/data/misc/wifi/config","w");
-		fprintf(config_fd,"cur_etheraddr=%02X:%02X:%02X:%02X:%02X:%02X",
+		config_fd = fopen("/data/misc/wifi/config", "w");
+		fprintf(config_fd, "cur_etheraddr=%02X:%02X:%02X:%02X:%02X:%02X",
 			macbuf[0], macbuf[1], macbuf[2],
 			macbuf[3], macbuf[4], macbuf[5]);
 		fclose(config_fd);
 
 		fclose(nvram_fd);
 	}
-
 	return 0;
 }
 
