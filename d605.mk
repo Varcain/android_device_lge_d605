@@ -138,6 +138,11 @@ PRODUCT_PACKAGES += \
 	libnetcmdiface \
 	hwaddrs
 
+PRODUCT_PACKAGES += \
+	consumerir.d605
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml
+
 # NFC packages
 PRODUCT_PACKAGES += \
     libnfc_nci_jni \
