@@ -11,7 +11,7 @@ DIR=`dirname $FILE`
     if [ ! -d $BASE/$DIR ]; then
 mkdir -p $BASE/$DIR
     fi
-cp /media/data/d605/images/system/$FILE $BASE/$FILE
+adb pull /$FILE $BASE/$FILE
 done
 
-./setup-makefiles.sh
+#./setup-makefiles.sh
