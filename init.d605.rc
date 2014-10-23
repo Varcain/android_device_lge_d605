@@ -916,6 +916,7 @@ service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0
 
 service fuse_usbdisk0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk0 /storage/usbdisk0
     class late_start
+    disabled
 
 service mtsd /system/bin/mtsd
     class late_start
