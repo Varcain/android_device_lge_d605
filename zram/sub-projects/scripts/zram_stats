@@ -52,13 +52,11 @@ find /sys/block -name 'zram*' | while read dev; do
 
 	[ "$__orig_data_size" == "0" ] && continue; 
 
-	cratio=$(echo $__compr_data_size*100/$__orig_data_size | bc)
+	cratio=$(echo $(($__compr_data_size*100/$__orig_data_size)))
 	show_stat "avg_compr_ratio" $cratio "%"
 
 	# Memory wasted due to fragmentation, metadata overhead etc.
-	ovhd=$(echo "($__mem_used_total - $__compr_data_size) * 100 / \
-						$__compr_data_size" | bc)
+	ovhd=$(echo $((($__mem_used_total - $__compr_data_size) * 100 / $__compr_data_size)))
 	show_stat "mem_overhead" $ovhd "%"
 	echo
 done
-
