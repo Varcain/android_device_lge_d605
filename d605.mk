@@ -169,8 +169,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.zram.sh:system/etc/init.d/init.zram.sh
-    $(LOCAL_PATH)/zram.ko:system/lib/modules/zram.ko
+    $(LOCAL_PATH)/init.zram.sh:system/etc/init.d/init.zram.sh \
+    $(LOCAL_PATH)/zram/zram.ko:system/lib/modules/zram.ko
 
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing

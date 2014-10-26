@@ -1,6 +1,6 @@
 #!/system/bin/bash
 
-MB=200
+MB=100
 
 insmod /system/lib/modules/zram.ko
 
