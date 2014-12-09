@@ -9,7 +9,6 @@ on init
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /storage/sdcard0 0700 root root
 
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /storage/sdcard1 0700 root root
 
     mkdir /mnt/media_rw/usbdisk0 0700 media_rw media_rw
@@ -29,8 +28,8 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
-   setprop ro.ssbd.session /dev/block/platform/msm_sdcc.1/by-name/eksst
-   setprop ro.ssbd.offset 50
+    setprop ro.ssbd.session /dev/block/platform/msm_sdcc.1/by-name/eksst
+    setprop ro.ssbd.offset 50
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -41,21 +40,30 @@ on init
 on fs
     mount_all fstab.d605
 
+    symlink /system/lib /lib
+
+    mkdir /cache/tmp
+    mkdir /cache/root
+    chown root root /cache/root
+    chmod 0775 /cache/tmp
+    symlink /cache/tmp /tmp
+    symlink /cache/root /root
+
     exec /system/bin/tune2fs -u system -r 10240 /dev/block/platform/msm_sdcc.1/by-name/userdata
 
     mkdir /sns 0755 system system
     mkdir /persist-lg 0755 system system
     mkdir /mpt 0775 system system
 
-    wait /dev/block/platform/msm_sdcc.1/by-name/sns  
+    wait /dev/block/platform/msm_sdcc.1/by-name/sns
     exec /system/bin/e2fsck -p /dev/block/platform/msm_sdcc.1/by-name/sns  
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/sns /sns nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue  
 
-    wait /dev/block/platform/msm_sdcc.1/by-name/drm  
+    wait /dev/block/platform/msm_sdcc.1/by-name/drm
     exec /system/bin/e2fsck -p /dev/block/platform/msm_sdcc.1/by-name/drm  
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/drm /persist-lg nosuid nodev barrier=1 noatime noauto_da_alloc errors=continue  
 
-    wait /dev/block/platform/msm_sdcc.1/by-name/mpt  
+    wait /dev/block/platform/msm_sdcc.1/by-name/mpt
     exec /system/bin/e2fsck -p /dev/block/platform/msm_sdcc.1/by-name/mpt  
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/mpt /mpt nodev nosuid barrier=1 noatime noauto_da_alloc errors=continue
 
@@ -64,6 +72,10 @@ on fs
 
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+
+    wait /dev/block/platform/msm_sdcc.3/mmcblk1p2
+    exec /system/bin/e2fsck -p /dev/block/platform/msm_sdcc.3/mmcblk1p2
+    mount ext4 /dev/block/platform/msm_sdcc.3/mmcblk1p2 /storage/sdcard1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -248,7 +260,7 @@ on post-fs
     start sreadahead
     #export LD_PRELOAD /system/lib/libNimsWrap.so
     export_rc /persist/init.cne.rc
-    start qcom-post-fs	
+    start qcom-post-fs
     chown system system /persist-lg
     chmod 0771 /persist-lg
 
@@ -357,8 +369,6 @@ on post-fs-data
     #Set default sdcard fs type
     setprop vold.sdcard_fs_type none
 
-    restorecon_check_recursive /data
-
     #Create directories for wiper services
     mkdir /data/wpstiles/ 0755 shell
     mkdir /data/wiper 0755 gps qcom_oncrpc
@@ -417,6 +427,8 @@ on post-fs-data
     mkdir /data/system/lgmdm 0700 system system
 
     setprop vold.post_fs_data_done 1
+
+    write /proc/sys/vm/page-cluster 0
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
@@ -647,7 +659,7 @@ on property:crypto.driver.load=0
      exec /system/bin/rmmod qce.ko
 
 service drmdiag /system/bin/drmdiagapp
-    class late_start
+     class late_start
      user root
      disabled
      oneshot
@@ -738,9 +750,6 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
-service charger /charger
-    class charger
-
 service ssr_diag /system/bin/ssr_diag
     class late_start
     user system
@@ -754,15 +763,6 @@ on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
 on property:persist.sys.ssr.restart_level=3
     write /sys/module/subsystem_restart/parameters/restart_level 3
-
-on property:persist.radio.sglte_sim_active=true
-    kill qmiproxy 15
-on property:persist.radio.sglte_sim_active=false
-    kill qmiproxy 15
-on property:persist.radio.sglte_csfb=true
-    kill qmiproxy 15
-on property:persist.radio.sglte_csfb=false
-    kill qmiproxy 15
 
 service diag_mdlog_start /system/bin/diag_mdlog
     class late_start
@@ -859,6 +859,14 @@ service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
 on property:init.svc.bootanim=stopped
     start usf-post-boot
 
+service healthd-charger /sbin/healthd -n
+    class charger
+    critical
+    seclabel u:r:healthd:s0
+
+service charger /charger
+    class charger
+
 on chargerlogo_adbd
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
@@ -882,6 +890,7 @@ on chargerlogo
    write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
    write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
+   start charger
    exec /sbin/chargerlogo
 
 service time_daemon /system/bin/time_daemon
@@ -918,10 +927,6 @@ service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0
     class late_start
     disabled
 
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
 service fuse_usbdisk0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk0 /storage/usbdisk0
     class late_start
     disabled
@@ -946,34 +951,12 @@ service bdaddr_loader /system/bin/bdaddr_loader
     group bluetooth net_bt_admin misc net_bt_stack
     disabled
     oneshot
-#BT_E : [PSIX-5377]BDADDR_LOADER
-
-# 2012.08.24 real-wifi@lge.com[wo0gi] TestMode Daemon for broadcom driver [START]
-service diagd /system/bin/diagd 
-	class late_start
-	user root
-	group radio system
-	disabled
-	oneshot
-	socket lsock_diagd stream 666
 
 on property:wifi_ftm.diagd_start=1
     start diagd
 
 on property:wifi_ftm.diagd_start=0
     stop diagd
-
-# 2012.08.24 real-wifi@lge.com[wo0gi] TestMode Daemon for broadcom driver [END]
-
-service sreadahead /sbin/treadahead
-    oneshot
-    disabled
-
-service sreadahead-check /sbin/sreadahead_check
-    class main
-    user root
-    group root
-    oneshot
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
@@ -1095,3 +1078,7 @@ service nfskill /system/bin/nfskillprocess
 on property:vold.decrypt=trigger_shutdown_framework
     start nfskill
 
+service rctd /system/bin/rctd
+    class late_start
+    user root
+    group root

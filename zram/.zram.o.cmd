@@ -1,1 +1,0 @@
-cmd_/opt/android/system/device/lge/d605/zram/zram.o := arm-eabi-ld -EL    -r -o /opt/android/system/device/lge/d605/zram/zram.o /opt/android/system/device/lge/d605/zram/zram_drv.o /opt/android/system/device/lge/d605/zram/zram_sysfs.o /opt/android/system/device/lge/d605/zram/sub-projects/allocators/xvmalloc-kmod/xvmalloc.o 
