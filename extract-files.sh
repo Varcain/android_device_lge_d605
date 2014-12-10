@@ -1,18 +1,17 @@
-#!/bin/bash
+#!/bin/sh
 
 VENDOR=lge
 DEVICE=d605
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
+rm -rf $BASE/*
 
-rm -rf $BASE
-
-grep -v '^#' proprietary-files.txt | grep -v '^$' | while read LINE; do
-    read OUT <<< "`dirname $LINE`"
-    if [ ! -d $BASE/$OUT ]; then
-        mkdir -p $BASE/$OUT > /dev/null
+for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$`; do
+DIR=`dirname $FILE`
+    if [ ! -d $BASE/$DIR ]; then
+mkdir -p $BASE/$DIR
     fi
-    cp /mnt/$LINE $BASE/$LINE
+cp /media/data/d605/images/system/$FILE $BASE/$FILE
 done
 
 ./setup-makefiles.sh

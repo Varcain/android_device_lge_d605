@@ -9,8 +9,6 @@ on init
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /storage/sdcard0 0700 root root
 
-    mkdir /storage/sdcard1 0700 root root
-
     mkdir /mnt/media_rw/usbdisk0 0700 media_rw media_rw
     mkdir /storage/usbdisk0 0700 root root
 
@@ -40,15 +38,6 @@ on init
 on fs
     mount_all fstab.d605
 
-    symlink /system/lib /lib
-
-    mkdir /cache/tmp
-    mkdir /cache/root
-    chown root root /cache/root
-    chmod 0775 /cache/tmp
-    symlink /cache/tmp /tmp
-    symlink /cache/root /root
-
     exec /system/bin/tune2fs -u system -r 10240 /dev/block/platform/msm_sdcc.1/by-name/userdata
 
     mkdir /sns 0755 system system
@@ -72,10 +61,6 @@ on fs
 
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
-
-    wait /dev/block/platform/msm_sdcc.3/mmcblk1p2
-    exec /system/bin/e2fsck -p /dev/block/platform/msm_sdcc.3/mmcblk1p2
-    mount ext4 /dev/block/platform/msm_sdcc.3/mmcblk1p2 /storage/sdcard1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -879,6 +864,7 @@ on chargerlogo_adbd
     write /sys/class/android_usb/android0/functions acm,diag,mass_storage,adb
     write /sys/class/android_usb/android0/iSerial $ro.serialno
     write /sys/class/android_usb/android0/enable 1
+    start charger
     start adbd
 
 on chargerlogo
@@ -891,7 +877,6 @@ on chargerlogo
    write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
    start charger
-   exec /sbin/chargerlogo
 
 service time_daemon /system/bin/time_daemon
    class late_start
