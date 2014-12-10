@@ -143,6 +143,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml
 
+# Offline charge
+PRODUCT_COPY_FILES += \
+	charger \
+	charger_res_images
+
 # NFC packages
 PRODUCT_PACKAGES += \
     libnfc_nci_jni \
