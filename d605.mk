@@ -139,6 +139,13 @@ PRODUCT_PACKAGES += \
 	hwaddrs
 
 PRODUCT_PACKAGES += \
+    libwpa_client \
+    hostapd \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
+PRODUCT_PACKAGES += \
 	consumerir.d605
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml

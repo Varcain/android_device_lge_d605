@@ -14,7 +14,6 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
-ro.telephony.ril_class=LGEQualcommUiccRIL
 DEVICE_PROVISIONED=1
 debug.sf.hw=1
 debug.egl.hw=1

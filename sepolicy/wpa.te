@@ -1,0 +1,4 @@
+allow wpa rfkill_device:chr_file rw_file_perms;
+allow wpa block_device:dir search;
+allow wpa misc_block_device:blk_file { getattr rw_file_perms };
+

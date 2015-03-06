@@ -1,0 +1,4 @@
+allow init_shell vfat:dir search;
+allow init_shell vfat:dir read;
+allow init_shell vfat:file getattr;
+allow init_shell vfat:dir open;

@@ -48,6 +48,13 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_USES_QC_TIME_SERVICES := true
 
+# SELinux policies
+# qcom sepolicy
+include device/qcom/sepolicy/sepolicy.mk
+
+BOARD_SEPOLICY_DIRS += \
+        device/lge/d605/sepolicy
+
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION := VER_0_8_X
